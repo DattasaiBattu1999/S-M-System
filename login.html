@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Login - College Portal</title>
+</head>
+<body class="auth-body">
+    <div class="login-container">
+        <div class="login-branding">
+            <div class="branding-content">
+                <h1>COLLEGE NAME</h1>
+                <div class="branding-divider"></div>
+                <p>Welcome to the Student Portal</p>
+            </div>
+        </div>
+
+        <div class="login-form-area">
+            <h2>Student Login</h2>
+            <form id="studentLoginForm" onsubmit="loginHandler(event, 'student')">
+                <div class="input-group">
+                    <label for="s_id">Student ID</label>
+                    <input type="text" id="s_id" placeholder="Enter your Student ID" required>
+                </div>
+                <div class="input-group">
+                    <label for="s_pass">Password</label>
+                    <input type="password" id="s_pass" placeholder="Enter your Password" required>
+                </div>
+                
+                <div class="form-options">
+                    <a href="password_reset.html" class="forgot-link">Forget password</a>
+                    <a href="admin_login.html" class="admin-link">Admin/Teacher Login</a>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+            
+            <p class="register-text">
+                Don't have an account? <a href="register.html">Create account.</a>
+            </p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Admin Login - College Portal</title>
+</head>
+<body class="auth-body">
+    <div class="login-container">
+        <div class="login-branding admin-branding">
+            <div class="branding-content">
+                <h1>ADMIN PORTAL</h1>
+                <div class="branding-divider admin-divider"></div>
+                <p>Manage courses, marks, and announcements.</p>
+            </div>
+        </div>
+
+        <div class="login-form-area">
+            <h2>Staff Login</h2>
+            <form onsubmit="loginHandler(event, 'admin')">
+                <div class="input-group">
+                    <label for="adminID">Staff ID</label>
+                    <input type="text" id="adminID" placeholder="Enter your Staff ID" required>
+                </div>
+                <div class="input-group">
+                    <label for="adminPassword">Password</label>
+                    <input type="password" id="adminPassword" placeholder="Enter your Password" required>
+                </div>
+                
+                <button type="submit" class="submit-btn admin-btn">Login to Portal</button>
+            </form>
+            
+            <p class="register-text">
+                <a href="login.html">← Back to Student Login</a>
+            </p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

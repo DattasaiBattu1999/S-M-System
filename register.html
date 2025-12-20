@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Create Account - College Portal</title>
+</head>
+<body class="auth-body">
+    <div class="login-container register-container-wide">
+        <div class="login-branding register-branding">
+            <div class="branding-content">
+                <h1>JOIN US</h1>
+                <div class="branding-divider"></div>
+                <p>Start your academic journey today.</p>
+            </div>
+        </div>
+
+        <div class="login-form-area scroll-form">
+            <h2>Create Account</h2>
+            <form id="registerForm">
+                <div class="input-group">
+                    <label>Register as:</label>
+                    <select id="roleSelector" onchange="toggleFields()">
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher/Admin</option>
+                    </select>
+                </div>
+
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <input type="text" id="reg_name" placeholder="John Doe" required>
+                    </div>
+                    <div class="input-group">
+                        <label>ID Number</label>
+                        <input type="text" id="reg_id" placeholder="ID-12345" required>
+                    </div>
+                </div>
+
+                <div id="studentOnly" class="input-group">
+                    <label>Course Name</label>
+                    <input type="text" id="reg_course" placeholder="e.g., B-Tech">
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="reg_pass" placeholder="••••••••" required>
+                </div>
+                
+                <button type="submit" class="submit-btn">Create Account</button>
+            </form>
+            <p class="register-text">Already have an account? <a href="login.html">Login</a></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

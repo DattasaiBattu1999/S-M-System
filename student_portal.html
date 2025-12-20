@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Student Portal - Excellence University</title>
+</head>
+
+<body class="dashboard-body">
+    <div class="wide-container">
+        <header class="portal-header">
+            <div class="brand-box">
+                <h1>EXCELLENCE UNIVERSITY</h1>
+                <p>Student Academic Portal</p>
+            </div>
+            <div class="header-right">
+                <span class="user-welcome">Welcome, <strong id="display_name">Student</strong>!</span>
+                <button onclick="logout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </header>
+
+        <nav class="horizontal-nav">
+            <ul>
+                <li class="active" onclick="showSection('dashboard', this)"><i class="fas fa-home"></i> Home</li>
+                <li onclick="showSection('announce-sec', this)"><i class="fas fa-bullhorn"></i> Notifications</li>
+                <li onclick="showSection('marks', this)"><i class="fas fa-graduation-cap"></i> Marks</li>
+                <li onclick="showSection('profile', this)"><i class="fas fa-user-circle"></i> Profile & Security</li>
+            </ul>
+        </nav>
+
+        <main class="dashboard-content">
+            <div id="dashboard" class="section">
+                <h2 class="section-title">Dashboard Overview</h2>
+                <div class="card welcome-banner">
+                    <h3>Academic Status</h3>
+                    <p>Enrolled Course: <strong id="display_course">Loading...</strong></p>
+                </div>
+                <div class="card">
+                    <h3>📢 Latest Announcements</h3>
+                    <div id="announcement_list">
+                        <p>Checking for updates...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="profile" class="section hidden">
+                <h2 class="section-title">Profile Management</h2>
+                <div class="profile-layout-grid">
+                    <div class="card">
+                        <h3><i class="fas fa-id-card"></i> Personal Information</h3>
+                        <p class="helper-text">Your ID cannot be changed. Contact admin for corrections.</p>
+                        <div class="input-group">
+                            <label>Student ID</label>
+                            <input type="text" id="prof_id" readonly class="readonly-field">
+                        </div>
+                        <div class="input-group">
+                            <label>Email Address</label>
+                            <input type="email" id="upd_email" placeholder="email@example.com">
+                        </div>
+                        <div class="input-group">
+                            <label>Mobile Number</label>
+                            <input type="text" id="upd_phone" placeholder="Phone Number">
+                        </div>
+                        <!--<div class="input-group">
+                            <label>Residential Address</label>
+                            <textarea id="upd_address" rows="3" placeholder="Enter full address"></textarea>
+                        </div> -->
+                        <button onclick="updateProfile()" class="submit-btn">Save Profile Changes</button>
+                    </div>
+
+                    <div class="card">
+                        <h3><i class="fas fa-shield-alt"></i> Security Settings</h3>
+                        <p class="helper-text">Update your password regularly to keep your account safe.</p>
+                        <div class="input-group">
+                            <label>Current Password</label>
+                            <input type="password" id="old_pass" placeholder="••••••••">
+                        </div>
+                        <div class="input-group">
+                            <label>New Password</label>
+                            <input type="password" id="new_pass_profile" placeholder="••••••••">
+                        </div>
+                        <div class="input-group">
+                            <label>Confirm New Password</label>
+                            <input type="password" id="conf_new_pass" placeholder="••••••••">
+                        </div>
+                        <button onclick="changePassword()" class="submit-btn security-btn">Update Password</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="marks" class="section hidden">
+                <h2 class="section-title">Academic Results</h2>
+                <div class="card">
+                    <table id="marks_table" style="width:100%; text-align:left; border-collapse:collapse;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid #ddd;">
+                                <th>Subject</th>
+                                <th>Semester</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody id="marks_list">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="announce-sec" class="section hidden">...</div>
+        </main>
+
+        <footer class="portal-footer">
+            <p>&copy; 2024 Excellence University | Student Support: support@univ.edu</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
