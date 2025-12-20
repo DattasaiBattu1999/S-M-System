@@ -113,4 +113,28 @@ app.get('/api/get-announcements/:course', (req, res) => {
     });
 });
 
+// --- 5. PASSWORD RESET ---
+app.post('/api/reset-password', (req, res) => {
+    const { role, id, newPassword } = req.body;
+    
+    // Determine table and column based on role
+    const table = (role === 'teacher' || role === 'admin') ? 'teachers' : 'students';
+    const idCol = (role === 'teacher' || role === 'admin') ? 'teacher_id' : 'student_id';
+
+    const sql = `UPDATE ${table} SET password = ? WHERE ${idCol} = ?`;
+
+    db.execute(sql, [newPassword, id], (err, result) => {
+        if (err) {
+            console.error("Reset Error:", err);
+            return res.status(500).send("Database Error");
+        }
+        
+        if (result.affectedRows === 0) {
+            return res.status(404).send("User ID not found.");
+        }
+        
+        res.send("Password updated successfully!");
+    });
+});
+
 app.listen(3000, () => console.log("Server running on port 3000"));

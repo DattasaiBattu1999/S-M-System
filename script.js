@@ -162,3 +162,37 @@ function initProfileFields() {
     if(document.getElementById('upd_phone')) document.getElementById('upd_phone').value = user.phone || '';
     if(document.getElementById('upd_address')) document.getElementById('upd_address').value = user.address || '';
 }
+
+// --- 6. PASSWORD RESET HANDLER ---
+document.addEventListener('submit', async (e) => {
+    if (e.target && e.target.id === 'resetForm') {
+        e.preventDefault();
+
+        const role = document.getElementById('resetRole').value;
+        const id = document.getElementById('resetId').value;
+        const newPass = document.getElementById('newPass').value;
+        const confPass = document.getElementById('confNewPass').value;
+
+        if (newPass !== confPass) {
+            return alert("Passwords do not match!");
+        }
+
+        try {
+            const res = await fetch(`${API_URL}/reset-password`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ role, id, newPassword: newPass })
+            });
+
+            const message = await res.text();
+            alert(message);
+
+            if (res.ok) {
+                window.location.href = 'login.html';
+            }
+        } catch (err) {
+            console.error("Reset Error:", err);
+            alert("Failed to connect to server.");
+        }
+    }
+});
