@@ -9,7 +9,7 @@ services:
     environment:
       - DB_HOST=db_service
       - DB_USER=root
-      - DB_PASSWORD=password
+      - DB_PASSWORD=ZEns@r123  # Ensure this matches the DB service below
       - DB_NAME=school_management_system
     depends_on:
       - db
@@ -18,11 +18,12 @@ services:
 
   db:
     container_name: db_service
-    build: 
+    build:
       context: ./db-app
     environment:
-      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=ZEns@r123 # Use the same password here
       - MYSQL_DATABASE=school_management_system
+    # We remove MYSQL_USER=root here to prevent the crash you saw in logs
     volumes:
       - db_data:/var/lib/mysql
     networks:
