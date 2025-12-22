@@ -6,6 +6,17 @@ require('dotenv').config();
 
 const app = express();
 
+const path = require('path');
+
+// Serve static files from a 'public' or 'frontend' folder
+// Ensure your HTML, CSS, and script.js are in this folder
+app.use(express.static(path.join(__dirname, './')));
+
+// Handle the root route by sending your login page
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'login.html'));
+});
+
 // Allow CORS for local development and production domains
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
