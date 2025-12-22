@@ -137,4 +137,30 @@ app.post('/api/reset-password', (req, res) => {
     });
 });
 
+// --- 6. USER REGISTRATION ---
+app.post('/api/register', (req, res) => {
+    const { role, name, id, course, password } = req.body;
+
+    if (role === 'student') {
+        const sql = "INSERT INTO students (student_id, name, course, password) VALUES (?, ?, ?, ?)";
+        db.execute(sql, [id, name, course, password], (err) => {
+            if (err) {
+                console.error("Registration Error:", err);
+                return res.status(500).send("Database Error: User ID might already exist.");
+            }
+            res.status(201).send("Student account created successfully!");
+        });
+    } else {
+        // For Teacher/Admin
+        const sql = "INSERT INTO teachers (teacher_id, name, password) VALUES (?, ?, ?)";
+        db.execute(sql, [id, name, password], (err) => {
+            if (err) {
+                console.error("Registration Error:", err);
+                return res.status(500).send("Database Error: User ID might already exist.");
+            }
+            res.status(201).send("Staff account created successfully!");
+        });
+    }
+});
+
 app.listen(3000, () => console.log("Server running on port 3000"));

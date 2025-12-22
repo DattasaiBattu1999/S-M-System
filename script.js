@@ -196,3 +196,43 @@ document.addEventListener('submit', async (e) => {
         }
     }
 });
+
+// --- 7. REGISTRATION HANDLER ---
+document.addEventListener('submit', async (e) => {
+    if (e.target && e.target.id === 'registerForm') {
+        e.preventDefault();
+
+        const role = document.getElementById('roleSelector').value;
+        const name = document.getElementById('reg_name').value;
+        const id = document.getElementById('reg_id').value;
+        const course = document.getElementById('reg_course') ? document.getElementById('reg_course').value : '';
+        const password = document.getElementById('reg_pass').value;
+
+        try {
+            const res = await fetch(`${API_URL}/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ role, name, id, course, password })
+            });
+
+            const result = await res.text();
+            alert(result);
+
+            if (res.ok) {
+                window.location.href = 'login.html';
+            }
+        } catch (err) {
+            console.error("Register Error:", err);
+            alert("Connection error.");
+        }
+    }
+});
+
+// Also add the toggleFields function if it's missing
+window.toggleFields = function() {
+    const role = document.getElementById('roleSelector').value;
+    const studentFields = document.getElementById('studentOnly');
+    if (studentFields) {
+        studentFields.style.display = (role === 'student') ? 'block' : 'none';
+    }
+};
