@@ -1,38 +1,33 @@
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
+// Add dotenv to handle environment variables from a .env file
+require('dotenv').config(); 
+
 const app = express();
 
+// Allow CORS for local development and production domains
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
-// const db = mysql.createPool({
-//     host: 'localhost',
-//     user: 'root',
-//     password: 'password', // Ensure this matches your MySQL password
-//     database: 'school_management_system',
-//     waitForConnections: true,
-//     connectionLimit: 10,
-//     queueLimit: 0
-// });
-
+// Database configuration using environment variables
 const db = mysql.createPool({
-    // It checks if a DB_HOST environment variable exists, 
-    // otherwise it defaults to 'localhost'
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || 'password',
     database: process.env.DB_NAME || 'school_management_system',
+    port: process.env.DB_PORT || 3306, // Default MySQL port
     waitForConnections: true,
-    connectionLimit: 10
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
-// Test Connection immediately on startup
+// Test Connection
 db.getConnection((err, connection) => {
     if (err) {
-        console.error("CRITICAL: Database connection failed!", err);
+        console.error("CRITICAL: Database connection failed!", err.message);
     } else {
-        console.log("SUCCESS: Connected to MySQL database.");
+        console.log(`SUCCESS: Connected to database at ${process.env.DB_HOST || 'localhost'}`);
         connection.release();
     }
 });
@@ -163,4 +158,5 @@ app.post('/api/register', (req, res) => {
     }
 });
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

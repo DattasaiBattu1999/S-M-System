@@ -1,10 +1,15 @@
-const API_URL = "http://localhost:3000/api";
+//const API_URL = "http://localhost:3000/api";
+const API_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://localhost:3000/api"
+    : "/api";
 
 // --- 1. GLOBAL UTILITIES ---
 window.logout = function() {
     localStorage.clear();
     window.location.href = 'login.html';
 };
+
+
 
 window.showSection = function(id, element) {
     document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
