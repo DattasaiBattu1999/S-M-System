@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: app_cont
+    build: .
+    ports:
+      - "1234:3000"
+    environment:
+      - DB_HOST=db_service
+      - DB_USER=root
+      - DB_PASSWORD=password
+      - DB_NAME=school_management_system
+    depends_on:
+      - db
+    networks:
+      - school_network
+
+  db:
+    container_name: db_service
+    build: 
+      context: ./db-app
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=school_management_system
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - school_network
+
+volumes:
+  db_data:
+
+networks:
+  school_network:
+    driver: bridge
