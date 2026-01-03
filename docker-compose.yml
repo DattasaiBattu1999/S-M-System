@@ -3,17 +3,15 @@ version: "3.8"
 services:
   app:
     container_name: app_cont
-    # build: .
-    image: dattasai1999/s-m-system:node-app
+    build: .
+    #image: dattasai1999/s-m-system:node-app
     ports:
       - "1234:3000"
     environment:
-      # --- ADD THESE LINES TO CONNECT TO THE DB SERVICE ---
       - DB_HOST=db
       - DB_USER=root
       - DB_PASSWORD=password
       - DB_NAME=school_management_system
-      # ---------------------------------------------------
       - MYSQL_ROOT_PASSWORD=password 
       - MYSQL_DATABASE=school_management_system
     depends_on:
@@ -23,9 +21,9 @@ services:
 
   db:
     container_name: db_service
-    # build:
-    # context: ./db-app
-    image: dattasai1999/s-m-system:db-app
+    build:
+      context: ./db-app
+    #image: dattasai1999/s-m-system:db-app
     environment:
       - MYSQL_ROOT_PASSWORD=password 
       - MYSQL_DATABASE=school_management_system
