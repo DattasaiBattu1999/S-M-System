@@ -23,7 +23,7 @@ app.use(express.json({ limit: '50mb' }));
 
 // Database configuration using environment variables
 const db = mysql.createPool({
-    host: process.env.DB_HOST || 'localhost',
+    host: process.env.DB_HOST || 'MySqlConnection',
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || 'password',
     database: process.env.DB_NAME || 'school_management_system',
