@@ -8,7 +8,13 @@ services:
     ports:
       - "1234:3000"
     environment:
-      - MYSQL_ROOT_PASSWORD=password # Use the same password here
+      # --- ADD THESE LINES TO CONNECT TO THE DB SERVICE ---
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=password
+      - DB_NAME=school_management_system
+      # ---------------------------------------------------
+      - MYSQL_ROOT_PASSWORD=password 
       - MYSQL_DATABASE=school_management_system
     depends_on:
       - db
@@ -18,10 +24,10 @@ services:
   db:
     container_name: db_service
     # build:
-    # context: ./db-app  <-- Moved this to be a comment so it doesn't break the 'image' key
+    # context: ./db-app
     image: dattasai1999/s-m-system:db-app
     environment:
-      - MYSQL_ROOT_PASSWORD=password # Use the same password here
+      - MYSQL_ROOT_PASSWORD=password 
       - MYSQL_DATABASE=school_management_system
     volumes:
       - db_data:/var/lib/mysql
