@@ -3,13 +3,13 @@ version: "3.8"
 services:
   app:
     container_name: app_cont
-    build: .
+    # build: .
+    image: dattasai1999/s-m-system:node-app
     ports:
       - "1234:3000"
     environment:
       - MYSQL_ROOT_PASSWORD=password # Use the same password here
       - MYSQL_DATABASE=school_management_system
-
     depends_on:
       - db
     networks:
@@ -17,12 +17,12 @@ services:
 
   db:
     container_name: db_service
-    build:
-      context: ./db-app
+    # build:
+    # context: ./db-app  <-- Moved this to be a comment so it doesn't break the 'image' key
+    image: dattasai1999/s-m-system:db-app
     environment:
       - MYSQL_ROOT_PASSWORD=password # Use the same password here
       - MYSQL_DATABASE=school_management_system
-    # We remove MYSQL_USER=root here to prevent the crash you saw in logs
     volumes:
       - db_data:/var/lib/mysql
     networks:
